@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-widht, initial-scale=1.0">
+        <link rel="stylesheet" href="estilo.css">
+        <title> "CineIA - Assistente de Recomendacao" </title>
+    </head>
+
+    <body>
+        <header class="topo">
+            <h1>CINE <span>IA</span></h1>
+            <p>Assistente de recomendacao</p>
+        </header>
+
+        <!--Area de configuracao de API-->
+        <section class="config">
+            <h2>1. Configure sua conexao com a Azure</h2>
+
+            <label for="endpoint">Endpoint do Recurso</label>
+
+            <input type="text" id="endpoint" placeholder="https://seu-recurso.openai.azure.com">
+
+            <label for="deployment">Nome do deployment</label>
+            <input type="text" id="deployment" placeholder="gpt-5">
+
+        <label for="apiKey">Chave de API</label>
+        <input type="password" id="apiKey" placeholder="Cola a sua chave aqui">
+
+        <button id="btnSalvar"> Salvar configuracao</button>
+        <span id="statusConfig"></span>
+        </section>
+
+        <!--Area do chat-->
+        <section class="chat">
+
+            <h2>2. Converse com o Assistente</h2>
+            <div id="mensagens" class="mensagens">
+                <div class="msg bot">
+                    Ola! Eu sou o Cine IA.
+                    Me conta o que voce ja assistiu e gostou, ou o clima que voce quer hoje
+                    (acao, comedia, suspense...) que eu te indico algo para ver.
+                </div>
+            </div>
+
+            <form id="formChat" class="form-chat">
+                <input type="text" id="campoMensagem" placeholder="Ex: Quero algo parecido com Stranger Things" autocomplete="off">
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+    </body>
+</html>
