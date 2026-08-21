@@ -33,6 +33,8 @@ const instrucoesCineIA = 'Voce e o CineIA, um assistente especializado em recome
 //Historico de conversa
 
 //Cria uma lista vazia
+//O comando let tambem cria a variavel, porem avisa para o Java que ela pode mudar com o tempo
+//ela eh diferente do "const" que nao se muda com o tempo
 let historico = [];
 
 //Passo 1 - Salvar Configuracao
@@ -92,8 +94,18 @@ formChat.addEventListener('submit', async (evento) => {
     campoMensagem.value = '';
 
     //Adicionar a mensagem ao historico
-    historico.push({
-        role: 'user',
+
+    //Adiciona um novo item ao final de uma lista (array) chamada historico.  
+    // Essa lista é fundamental para a IA, pois envia o contexto das 
+    // mensagens passadas a cada nova pergunta.
+    historico.push({ 
+        
+    //Define a propriedade role (papel) do objeto como 'user'. Isso informa à API do OpenAI 
+    // que esta mensagem específica foi enviada pela pessoa, e não pelo sistema ou pela IA.
+        role: 'user', 
+        
+        //Define a propriedade content (conteúdo) do objeto com o valor exato da frase que você 
+        // //acabou de digitar no chat.
         content: texto
     });
 
@@ -113,16 +125,21 @@ formChat.addEventListener('submit', async (evento) => {
     try {
 
         //Chama a Azure OpenAI
+        //O uso do await faz o código "pausar" a execução desta linha até que os servidores da Azure respondam. 
+        // Quando a resposta do assistente chega, seu texto é armazenado na constante resposta.
         const resposta = await perguntaParaAzure();
 
 
 
-        //Substituir "Pensando..." pela resposta
+        //Substituir "Pensando..." pela resposta da IA
         carregando.textContent = resposta;
 
 
-        //So adiciona ao historico se recebemos uma resposta valida
-        if (resposta && !resposta.startsWith('Ocorreu um erro')) {
+        //So adiciona ao historico se recebemos uma resposta valida  
+        // a linha if quer dizer: Se tiver uma resposta, e essa resposta não comecar com "Ocorreu um erro", 
+        // ele adicionar ao historico da conversa, para usar na proxima mensagem
+         if (resposta && !resposta.startsWith('Ocorreu um erro')) {
+
 
             historico.push({
                 role: 'assistant',
